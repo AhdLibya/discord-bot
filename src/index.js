@@ -1,17 +1,15 @@
-require('dotenv').config()
+import {config} from "dotenv"
+import {Client , GatewayIntentBits , Events, Collection} from 'discord.js'
+import * as fs from "fs"
 
-const {Client , GatewayIntentBits , Events} = require("discord.js")
+config()
+
+const TOKEN = process.env.DISCORD_BOT_TOKEN
 
 const client = new Client({intents: [GatewayIntentBits.Guilds] })
 
-client.on('messageCreate' , msg => {
-    console.log(msg)
-})
+client.commands = new Collection()
 
-client.on(Events.MessageCreate , msg => {
-    console.log(msg.author.username)
-})
-
-client.login(process.env.DISCORD_BOT_TOKEN).catch(err => console.log(err)).then( () =>{
+client.login(TOKEN).catch(err => console.log(err)).then( () =>{
     console.log('client login')
 } )
