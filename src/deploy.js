@@ -8,12 +8,12 @@ const TOKEN = process.env.BOT_TOKEN
 const CLIENTID = process.env.CLIENTID
 
 const commands = [];
-const commandsPath = path.resolve(__dirname, './commands');
+const commandsPath = path.resolve(__dirname, './commands/Slash');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
 // Grab the SlashCommandBuilder#toJSON() output of each command's data for deployment
 for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
+	const command = require(`./commands/Slash/${file}`);
 	commands.push(command.data.toJSON());
 }
 
