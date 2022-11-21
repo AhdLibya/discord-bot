@@ -15,11 +15,18 @@ module.exports = function(client) {
         const args = subString.split(' ')
         // new array for the argment
         let argments = []
+        client.isNull = false
         for(let i=1; i<=args.length; i++) 
         {
             argments.push(args[i])
         }
-        const command = await GetCommandByName(args[0])
-        command(msg ,argments)
+        const command =  GetCommandByName(args[0])
+        // make sure the command is exist other way we return without breaking the whole bot
+        if (!command || command === null)
+        {
+            msg.channel.send(`${args[0]} is Not valid Command Name`)
+            return ;
+        }
+        else await command(msg ,argments , client)
     })
 }
