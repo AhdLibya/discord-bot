@@ -6,18 +6,31 @@ module.exports = async (msg , argment, client) => { // argment[0] = url or path 
     
     
     let guildQueue = client.Player.getQueue(msg.guild.id);
-    client.guildQueue = guildQueue
-    
+    client.currentQueue = guildQueue
+
     let queue = client.Player.createQueue(msg.guild.id);
     await queue.join(msg.member.voice.channel);
-    
+
     let url = argment[0]
     if (!url) return msg.channel.send('you have to Provide url to play');
-    const result = await queue.play(url).catch((err) => {
-        console.error(err)
-        if (!guildQueue)
-            queue.stop()
-    })
+
+    if (url === 'Playlist')
+    {
+        url = argment[1]
+        const result = await queue.playlist(url).catch((err) => {
+            console.log(err)
+            msg.channel.send('There was no Playlist found with that link.')
+            if (!guildQueue)
+                queue.stop()
+        })
+    }else{
+        const result = await queue.play(url).catch((err) => {
+            console.log(err)
+            if (!guildQueue)
+                queue.stop()
+        })
+    }
+
 
     client.Player.on('channelEmpty' , () => {
         client.Player.deleteQueue(msg.guild.id)

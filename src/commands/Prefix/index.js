@@ -15,11 +15,12 @@ const Data = {
         }
     },
 
-    Play : require('./commands/Play')
+    Play : require('./commands/Play'),
+    Stop : require('./commands/Stop')
 }
 
 exports.GetCommandByName = function(commandName) 
 {
     if (Data[commandName] === null) return false;
-    return Data[commandName]
+    return Data[commandName] ;
 }
