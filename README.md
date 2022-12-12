@@ -30,5 +30,5 @@ now you can start your bot
 
     node .
 
-### OFFICAL DOCUMENTATION
+### OFFICIAL DOCUMENTATION
 [Discord.js](https://discord.js.org/#/)
