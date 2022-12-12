@@ -28,7 +28,7 @@ first you have to register slash commands
 
 now you can start your bot
 
-    node ./index.js || node .
+    node .
 
 ### OFFICAL DOCUMENTATION
 [Discord.js](https://discord.js.org/#/)
